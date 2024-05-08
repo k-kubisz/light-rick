@@ -1,0 +1,62 @@
+<div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+  <div class="rounded overflow-hidden flex flex-col max-w-xl mx-auto">
+    <div
+      class="w-full max-w-md p-4 mb-5 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+    >
+      <h2
+        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+      >
+        {{ rickyLocation?.name }}
+      </h2>
+      <p class="font-normal text-gray-700 dark:text-gray-400">
+        Dimenson: {{ rickyLocation?.dimension }}
+      </p>
+      <hr />
+      <p class="font-normal text-gray-700 dark:text-gray-400 pt-2">
+        Type: {{ rickyLocation?.type }}
+      </p>
+    </div>
+
+    <div
+      class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+    >
+      <div class="flex items-center justify-between mb-4">
+        <h2
+          class="text-xl font-bold leading-none text-gray-900 dark:text-white"
+        >
+          Residents
+        </h2>
+      </div>
+      <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+          @for (char of residentsChars; track $index) {
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <img
+                  class="w-8 h-8 rounded-full"
+                  src="{{ char.image }}"
+                  alt="Photo of {{ char.name }}"
+                />
+              </div>
+              <div class="flex-1 min-w-0 ms-4">
+                <span
+                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                >
+                  {{ char.name }}
+                </span>
+              </div>
+              <button
+                [routerLink]="['/characters', char.id]"
+                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+              >
+                View Detials
+              </button>
+            </div>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

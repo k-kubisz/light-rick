@@ -1,0 +1,20 @@
+<div
+  class="flex flex-col items-center bg-gradient-to-b from-neutral-100 via-neutral-400 to-neutral-500"
+>
+  <div class="container m-4 p-4">
+    <div class="text-center">
+      <app-rick-filter
+        (filtersChange)="handleFiltersChange($event)"
+      ></app-rick-filter>
+
+      <app-rick-list [characters]="characters()"></app-rick-list>
+
+      <app-pagination
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        (nextPage)="nextPageFun($event)"
+        (prevPage)="prevPageFun($event)"
+      ></app-pagination>
+    </div>
+  </div>
+</div>

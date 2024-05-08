@@ -1,0 +1,5 @@
+<div class="grid grid-cols-4 gap-4">
+  @for (item of characters; track item.id) {
+  <app-rick-card [character]="item" [isFav]="checkForFav(item)"></app-rick-card>
+  }
+</div>

@@ -1,0 +1,23 @@
+<mat-toolbar class="bg-gray-200">
+  <button
+    [routerLink]="'characters'"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <img
+      class="w-8 h-8 rounded-full"
+      src="https://rickandmortyapi.com/api/character/avatar/19.jpeg"
+    />
+  </button>
+  <span>Light - Rick</span>
+  <span class="example-spacer"></span>
+  <button
+    [routerLink]="'favorites'"
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon>favorite</mat-icon>
+  </button>
+</mat-toolbar>

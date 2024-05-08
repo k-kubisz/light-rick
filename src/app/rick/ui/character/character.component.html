@@ -1,0 +1,50 @@
+<div class="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+  <div class="rounded overflow-hidden flex flex-col max-w-xl mx-auto">
+    <a href="#">
+      <img
+        class="w-full"
+        src="{{ singleChar?.image }}"
+        alt="Sunset in the mountains"
+      />
+    </a>
+    <div class="relative -mt-16 px-10 pt-5 pb-16 bg-white m-10">
+      <a
+        href="#"
+        class="font-semibold text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2"
+        >{{ singleChar?.name }}</a
+      >
+      <p class="text-gray-500 text-sm">
+        Number of episod: {{ singleChar?.episode?.length }}
+      </p>
+      Last location:
+      <a
+        [routerLink]="['/locations', locationID]"
+        class="text-gray-500 underline hover:text-indigo-600"
+      >
+        {{ singleChar?.location?.name }}
+      </a>
+      <p class="mt-5 text-gray-600 text-xs">
+        {{ singleChar?.gender }} - {{ singleChar?.species }}
+      </p>
+      <p class="text-gray-600 text-xs">Status: {{ singleChar?.status }}</p>
+
+      <div class="text-center mt-10">
+        <button
+          [disabled]="singleChar?.id === 1"
+          [routerLink]="['/characters', prevCharID]"
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
+        >
+          Prev
+        </button>
+        @if(singleChar?.id) {
+        <button
+          [routerLink]="['/characters', nextCharID]"
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+        >
+          Next
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

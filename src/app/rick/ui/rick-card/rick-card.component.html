@@ -1,0 +1,35 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ character.name }}</mat-card-title>
+    <mat-card-subtitle class="light-card-subtitle">
+      <span
+        class="bottom-0 inline-block w-3.5 h-3.5 mr-1 bg-red border-2 border-white dark:border-gray-800 rounded-full"
+        [class.bg-green-400]="character.status === 'Alive'"
+        [class.bg-red-600]="character.status === 'Dead'"
+        [class.bg-gray-400]="character.status === 'unknown'"
+      ></span>
+      {{ character.gender }} - {{ character.species }} (
+      {{ character.status | lowercase }})
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <img
+    mat-card-image
+    src="{{ character.image }}"
+    alt="Photo of a {{ character.name }}"
+  />
+
+  <mat-card-actions>
+    <button [routerLink]="['/characters', character.id]" mat-button>
+      View More
+    </button>
+
+    @if (!isFav) {
+    <button mat-button (click)="addToFav(character)">Add To Fav</button>
+    }@else {
+    <button mat-button (click)="removeFromFav(character)">Remove</button>
+
+    }
+  </mat-card-actions>
+</mat-card>
