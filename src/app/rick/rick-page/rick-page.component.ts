@@ -15,6 +15,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PaginationComponent } from '../ui/pagination/pagination.component';
 import { Info } from '../model/info.model';
+import { LoaderComponent } from '../../ui/loader/loader.component';
 
 type TasksListFiltersForm = FormGroup<{
   searchChar: FormControl<string>;
@@ -32,6 +33,7 @@ export type TaskFilterValue = ReturnType<TasksListFiltersForm['getRawValue']>;
     RickListComponent,
     RouterLink,
     PaginationComponent,
+    LoaderComponent,
   ],
   templateUrl: './rick-page.component.html',
   styleUrl: './rick-page.component.scss',
@@ -45,6 +47,7 @@ export class RickPageComponent {
   currentPage = 1;
   totalPages: number = 0;
   searchChar: string = '';
+  loading: boolean = false;
 
   handleFiltersChange(searchChar: TaskFilterValue): void {
     this.currentPage = 1;
@@ -53,6 +56,7 @@ export class RickPageComponent {
   }
 
   getCharcters(searchChar: TaskFilterValue) {
+    this.loading = true;
     this.backend
       .getAll({ name: searchChar.searchChar, page: searchChar.page })
       .subscribe((response) => {
@@ -65,6 +69,7 @@ export class RickPageComponent {
         }
 
         this.searchChar = searchChar.searchChar;
+        this.loading = false;
       });
   }
 

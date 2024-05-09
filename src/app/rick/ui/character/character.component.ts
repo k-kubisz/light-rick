@@ -1,18 +1,22 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { CharactersApiService } from '../../data-access/characters.api.service';
 import { Character } from '../../model/characters.model';
-import { JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { LoaderComponent } from '../../../ui/loader/loader.component';
 
 @Component({
   selector: 'app-character',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, NgIf, ReactiveFormsModule, LoaderComponent],
   templateUrl: './character.component.html',
   styleUrl: './character.component.scss',
 })
 export class CharacterComponent implements OnInit {
   @Input() characterId: string | null = null;
+
+  private formBuilder = inject(NonNullableFormBuilder);
 
   singleChar: Character | null = null;
 
@@ -22,6 +26,13 @@ export class CharacterComponent implements OnInit {
   prevCharID: number | null = null;
 
   locationID: string | undefined = '';
+
+  loading: boolean = false;
+
+  form = this.formBuilder.group({
+    name: this.formBuilder.control<string>(''),
+    description: this.formBuilder.control<string>(''),
+  });
 
   ngOnInit(): void {}
 
@@ -33,6 +44,7 @@ export class CharacterComponent implements OnInit {
   }
 
   getCharacter(charId: string) {
+    this.loading = true;
     this.backend.getSingleCharacter(charId).subscribe((response) => {
       if (response.location && response.location.url) {
         const locationUrl = response.location.url;
@@ -41,6 +53,7 @@ export class CharacterComponent implements OnInit {
           this.locationID = parts.pop();
         }
       }
+      this.loading = false;
       this.singleChar = response;
     });
   }
@@ -48,5 +61,9 @@ export class CharacterComponent implements OnInit {
   getNextPrevIndex(currentIndex: number) {
     this.prevCharID = currentIndex > 1 ? currentIndex - 1 : null;
     this.nextCharID = currentIndex + 1;
+  }
+
+  onSubmit() {
+    console.log(this.form.getRawValue());
   }
 }

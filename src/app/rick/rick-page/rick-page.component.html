@@ -7,6 +7,10 @@
         (filtersChange)="handleFiltersChange($event)"
       ></app-rick-filter>
 
+      @if (loading) {
+      <app-loader></app-loader>
+
+      }@else {
       <app-rick-list [characters]="characters()"></app-rick-list>
 
       <app-pagination
@@ -15,6 +19,7 @@
         (nextPage)="nextPageFun($event)"
         (prevPage)="prevPageFun($event)"
       ></app-pagination>
+      }
     </div>
   </div>
 </div>
