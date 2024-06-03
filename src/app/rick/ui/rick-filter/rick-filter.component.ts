@@ -1,5 +1,13 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { Subscription, debounceTime, startWith } from 'rxjs';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Output,
+  inject,
+} from '@angular/core';
+import { Subscription, debounceTime, interval, startWith } from 'rxjs';
+
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormsModule,
   NonNullableFormBuilder,
@@ -25,8 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class RickFilterComponent {
   private formBuilder = inject(NonNullableFormBuilder);
-
-  private formChangesSubscription?: Subscription;
+  private destroyRef = inject(DestroyRef);
 
   @Output() filtersChange = new EventEmitter<any>();
 
@@ -36,14 +43,14 @@ export class RickFilterComponent {
   });
 
   ngOnInit(): void {
-    this.formChangesSubscription = this.form.valueChanges
-      .pipe(startWith(this.form.value), debounceTime(200))
+    this.form.valueChanges
+      .pipe(
+        startWith(this.form.value),
+        debounceTime(200),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe((value) => {
         this.filtersChange.emit(value);
       });
-  }
-
-  ngOnDestroy() {
-    this.formChangesSubscription?.unsubscribe();
   }
 }

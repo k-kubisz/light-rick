@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, inject } from '@angular/core';
 import { CharactersApiService } from '../../data-access/characters.api.service';
 import { Character } from '../../model/characters.model';
 import { RouterLink } from '@angular/router';
@@ -13,20 +13,16 @@ import { LoaderComponent } from '../../../ui/loader/loader.component';
   templateUrl: './character.component.html',
   styleUrl: './character.component.scss',
 })
-export class CharacterComponent implements OnInit {
+export class CharacterComponent {
   @Input() characterId: string | null = null;
 
   private formBuilder = inject(NonNullableFormBuilder);
-
-  singleChar: Character | null = null;
-
   private backend = inject(CharactersApiService);
 
+  singleChar: Character | null = null;
   nextCharID: number | null = null;
   prevCharID: number | null = null;
-
   locationID: string | undefined = '';
-
   loading: boolean = false;
 
   form = this.formBuilder.group({
@@ -34,10 +30,8 @@ export class CharacterComponent implements OnInit {
     description: this.formBuilder.control<string>(''),
   });
 
-  ngOnInit(): void {}
-
-  ngOnChanges() {
-    if (this.characterId) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['characterId'] && this.characterId) {
       this.getCharacter(this.characterId);
       this.getNextPrevIndex(+this.characterId);
     }

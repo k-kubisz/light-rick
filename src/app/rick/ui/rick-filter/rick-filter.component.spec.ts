@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RickFilterComponent } from './rick-filter.component';
+import { RickFilterComponent } from './RickFilterComponent';
 
 describe('RickFilterComponent', () => {
   let component: RickFilterComponent;
@@ -8,10 +8,9 @@ describe('RickFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RickFilterComponent]
-    })
-    .compileComponents();
-    
+      imports: [RickFilterComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(RickFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
