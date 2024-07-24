@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  WritableSignal,
-  effect,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RickCardComponent } from '../ui/rick-card/rick-card.component';
 import { RickFilterComponent } from '../ui/rick-filter/rick-filter.component';
 import { RickListComponent } from '../ui/rick-list/rick-list.component';
@@ -14,7 +7,6 @@ import { Character } from '../model/characters.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PaginationComponent } from '../ui/pagination/pagination.component';
-import { Info } from '../model/info.model';
 import { LoaderComponent } from '../../ui/loader/loader.component';
 
 type TasksListFiltersForm = FormGroup<{

@@ -5,7 +5,7 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { Subscription, debounceTime, interval, startWith } from 'rxjs';
+import { debounceTime, startWith } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -35,7 +35,10 @@ export class RickFilterComponent {
   private formBuilder = inject(NonNullableFormBuilder);
   private destroyRef = inject(DestroyRef);
 
-  @Output() filtersChange = new EventEmitter<any>();
+  @Output() filtersChange = new EventEmitter<{
+    searchChar: string;
+    page: number;
+  }>();
 
   form = this.formBuilder.group({
     searchChar: this.formBuilder.control<string>(''),
@@ -49,8 +52,8 @@ export class RickFilterComponent {
         debounceTime(200),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe((value) => {
-        this.filtersChange.emit(value);
+      .subscribe(() => {
+        this.filtersChange.emit(this.form.getRawValue());
       });
   }
 }

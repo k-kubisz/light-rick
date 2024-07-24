@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, SimpleChanges, inject } from '@angular/core';
 import { CharactersApiService } from '../../data-access/characters.api.service';
 import { Character } from '../../model/characters.model';
 import { RouterLink } from '@angular/router';

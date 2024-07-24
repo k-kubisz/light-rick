@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { RickFilterComponent } from './RickFilterComponent';
+import { RickFilterComponent } from './rick-filter.component';
 
 describe('RickFilterComponent', () => {
   let component: RickFilterComponent;

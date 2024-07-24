@@ -8,10 +8,9 @@ describe('RickPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RickPageComponent]
-    })
-    .compileComponents();
-    
+      imports: [RickPageComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(RickPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

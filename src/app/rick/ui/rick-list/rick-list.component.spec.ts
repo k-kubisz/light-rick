@@ -8,10 +8,9 @@ describe('RickListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RickListComponent]
-    })
-    .compileComponents();
-    
+      imports: [RickListComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(RickListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
